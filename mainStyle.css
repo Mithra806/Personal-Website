@@ -1,0 +1,56 @@
+body {
+    background-image: url("https://img.freepik.com/fotos-premium/tecido-estampado-xadrez-material-tecido-textura-quadrado-azul_102618-3000.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: MidnightBlue;
+
+      }
+nav{
+  margin-bottom: 19px;
+}
+
+nav a{
+  background-color: white;
+  border: 4px ridge Tomato;
+  padding: 1px 30px;
+  margin: 10px;
+  text-decoration: none;
+  font-size: 25px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+nav a:hover{
+  color: Tomato;
+  transform: scale(1.05);
+}
+
+      *{
+        color: MidnightBlue;
+        
+        border-radius: 5px;
+        text-align: center;
+
+
+        
+      }
+
+.hero {
+  border: 5px ridge Tomato;
+  padding: 10px 20px;
+  background-color: white;
+
+  display: inline-block;
+  margin: 0 auto;
+}
+      
+    p {    
+  border: 5px ridge Tomato;
+  background-color: white;
+  padding: 10px 20px;
+  width: fit-content;
+  margin: 15px auto;
+  font-size: 20px;
+
+      }   
