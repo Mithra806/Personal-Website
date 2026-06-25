@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mithra's Artwork</title>
+    <link rel="stylesheet" href="./artworkStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="banner-wrap">
+      <img src="banner.png" alt="Mithra's Artwork Banner" class="banner-img">
+      <div class="banner-placeholder">banner placeholder<br><span>851 x 200px</span></div>
+    </div>
+
+    <div class="marquee-bar">
+      <marquee>✦ WELCOME TO MY ART GALLERYYYYY ✦</marquee>
+    </div>
+
+    <div class="lace-divider"></div>
+
+    <div class="page-wrap">
+      <div class="sidebar">
+        <div class="sidebar-box">
+          <p class="sidebar-title">navigate</p>
+          <ul>
+            <li><a href="#" id="mainpage-link">Main Page 🏠</a></li>
+            <li><a href="#" id="photography-link">Photography 📷</a></li>
+            <li><a href="#" id="journals-link">Journals 📓</a></li>
+            <li><a href="#" id="projects-link">Projects 🔧</a></li>
+            <li><a href="#" id="media-link">Media 🎵</a></li>
+            <li><a href="#" id="inspirations-link">Inspirations ✨</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-box">
+          <p class="sidebar-title">About my art!</p>
+          <p class="sidebar-text">I love experimenting with different styles and mediums. A lot of my art is mostly fanart though D':</p>
+        </div>
+
+        <div class="sidebar-box">
+          <p class="sidebar-title">Tools I use</p>
+          <p class="sidebar-text">✏️ pencil & paper<br>🎨 ibis Paint X</p>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <h1 class="gallery-title">✦ Art Gallery ✦</h1>
+        <p class="gallery-sub">Click on a piece to view it bigger!</p>
+
+        <div class="gallery-grid">
+          <div class="gallery-item placeholder-art"><span>art piece 1!</span></div>
+          <div class="gallery-item placeholder-art"><span>art piece 2!</span></div>
+          <div class="gallery-item placeholder-art"><span>art piece 3!</span></div>
+          <div class="gallery-item placeholder-art"><span>art piece 4!</span></div>
+          <div class="gallery-item placeholder-art"><span>art piece 5!</span></div>
+          <div class="gallery-item placeholder-art"><span>art piece 6!</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="drawing-section">
+      <h2 class="drawing-title">✦ Doodle Corner ✦</h2>
+      <p class="drawing-sub">Leave a little doodle!</p>
+      <div class="drawing-container">
+        <section class="tools-board">
+          <div class="row">
+            <label class="title"><strong>Tools</strong></label>
+            <ul class="options">
+              <li class="option active tool" id="brush">
+                <i class="fas fa-brush"></i>
+                <span>Brush</span>
+              </li>
+              <li class="option tool" id="eraser">
+                <i class="fas fa-eraser"></i>
+                <span>Eraser</span>
+              </li>
+              <li class="option">
+                <input type="range" id="size-slider" min="1" max="30" value="5">
+              </li>
+            </ul>
+          </div>
+
+          <div class="row colors">
+            <label class="title">Colors</label>
+            <ul class="options">
+              <li class="option"></li>
+              <li class="option selected"></li>
+              <li class="option"></li>
+              <li class="option"></li>
+              <li class="option">
+                <input type="color" value="#00FF00" id="color-picker">
+              </li>
+            </ul>
+          </div>
+
+          <div class="row buttons">
+            <button class="clear-canvas">Clear Canvas</button>
+          </div>
+        </section>
+
+        <section class="drawing-board">
+          <canvas></canvas>
+        </section>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+<script>
+  const canvas = document.querySelector("canvas");
+  const toolBtns = document.querySelectorAll(".tool");
+  const sizeSlider = document.querySelector("#size-slider");
+  const colorBtns = document.querySelectorAll(".colors .option");
+  const colorPicker = document.querySelector("#color-picker");
+  const clearCanvasBtn = document.querySelector(".clear-canvas");
+  const ctx = canvas.getContext("2d");
+
+  let prevMouseX, prevMouseY, snapshot,
+      isDrawing = false,
+      selectedTool = "brush",
+      brushWidth = 5,
+      selectedColor = "#000";
+
+  const setCanvasBackground = () => {
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = selectedColor;
+  };
+
+  window.addEventListener("load", () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    setCanvasBackground();
+  });
+
+  const startDraw = (e) => {
+    isDrawing = true;
+    prevMouseX = e.offsetX;
+    prevMouseY = e.offsetY;
+    ctx.beginPath();
+    ctx.lineWidth = brushWidth;
+    ctx.strokeStyle = selectedColor;
+    ctx.fillStyle = selectedColor;
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  };
+
+  const drawing = (e) => {
+    if (!isDrawing) return;
+    ctx.putImageData(snapshot, 0, 0);
+    ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+  };
+
+  toolBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".tool.active").classList.remove("active");
+      btn.classList.add("active");
+      selectedTool = btn.id;
+    });
+  });
+
+  sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value);
+
+  colorBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".colors .option.selected").classList.remove("selected");
+      btn.classList.add("selected");
+      selectedColor = window.getComputedStyle(btn).getPropertyValue("background-color");
+    });
+  });
+
+  colorPicker.addEventListener("change", () => {
+    colorPicker.parentElement.style.background = colorPicker.value;
+    colorPicker.parentElement.click();
+  });
+
+  clearCanvasBtn.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    setCanvasBackground();
+  });
+
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", drawing);
+  canvas.addEventListener("mouseup", () => isDrawing = false);
+</script>
+   
+    
+  </body>
+</html>

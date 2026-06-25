@@ -1,29 +1,117 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset = "UTF-8">
-    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mithra's Artworks</title>
-    <link rel = "stylesheet" href="style.css">
-</head>
-<body>
-  
-  <nav>
-    <a href="#Mainpage">Main Page</a>
-    <a href="#Projects">Projects</a>
-    <a href="#Journals">Journals</a>
-    <a href="#Media">Media</a>
-    <a href="#Inspirations">Inspirations</a>
-    <a href="#Photography">Photography</a>
-  </nav>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mithra's Photography</title>
+    <link rel="stylesheet" href="./photographyStyle.css">
+  </head>
+  <body>
+    <div class="waves-container">
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+    <nav>
+      <a href="#" id="mainpage-link">Main Page</a>
+      <a href="#" id="artwork-link">Artwork</a>
+      <a href="#" id="projects-link">Projects</a>
+      <a href="#" id="journals-link">Journals</a>
+      <a href="#" id="media-link">Media</a>
+      <a href="#" id="inspirations-link">Inspirations</a>
+    </nav>
 
-<div class="hero">
-  
-  <h1>Mithra's Artwork</h1>
-</div>
-      <p>Art is something I'm really passionate about. I love expe</p> 
-      <footer>
-        <p>Contact me at: mithrasenthil15@gmail.com</p>
-      </footer>
-    </body>
+    <div class="sound-mixer">
+      <p class="mixer-title">nature sounds</p>
+      <p class="mixer-hint">Click anywhere on this page to start! :0</p>
+      <div class="mixer-grid">
+        <div class="sound-card">
+          <img src="rain.png" alt="rain" class="sound-icon">
+          <span class="sound-label">Rain</span>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="sound-slider" data-sound="rainAmbiance">
+        </div>
+        <div class="sound-card">
+          <img src="forest.png" alt="forest" class="sound-icon">
+          <span class="sound-label">Forest</span>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="sound-slider" data-sound="forest">
+        </div>
+        <div class="sound-card">
+          <img src="bird.png" alt="birds" class="sound-icon">
+          <span class="sound-label">Birds</span>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="sound-slider" data-sound="birdsChirping">
+        </div>
+        <div class="sound-card">
+          <img src="windChimes.png" alt="wind chimes" class="sound-icon">
+          <span class="sound-label">Wind Chimes</span>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="sound-slider" data-sound="windsChimes">
+        </div>
+        <div class="sound-card">
+          <img src="river.png" alt="river" class="sound-icon">
+          <span class="sound-label">River</span>
+          <input type="range" min="0" max="1" step="0.01" value="0" class="sound-slider" data-sound="riverFlowing">
+        </div>
+      </div>
+    </div>
+
+    <div class="split-container">
+      <div class="text-half">
+        <div class="hero">
+          <h1>Mithra's Photography</h1>
+        </div>
+        <p>I'm really into nature and landscape photography.</p>
+      </div>
+      <div class="photo-half">
+        <div class="photo-grid">
+          <img src="bridge.jpeg" alt="bridge">
+          <img src="buildings.jpeg" alt="buildings">
+          <img src="dino.jpeg" alt="dino">
+          <img src="fieldTrees.jpeg" alt="field trees">
+          <img src="lakeCamping.jpeg" alt="lake camping">
+          <img src="rainbow.jpeg" alt="rainbow">
+          <img src="tentTrees.jpeg" alt="tent trees">
+          <img src="waterTrees.jpeg" alt="water trees">
+          <img src="whismyTrees.jpeg" alt="whimsy trees">
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    <script>
+      const sounds = {
+        rainAmbiance: new Audio('./rainAmbiance.mp3'),
+        forest: new Audio('./forest.mp3'),
+        birdsChirping: new Audio('./birdsChirping.mp3'),
+        windsChimes: new Audio('./windsChimes.mp3'),
+        riverFlowing: new Audio('./riverFlowing.mp3'),
+      };
+
+      Object.values(sounds).forEach(audio => {
+        audio.loop = true;
+        audio.volume = 0;
+        audio.muted = true;
+      });
+
+      let unlocked = false;
+
+      document.addEventListener('click', function() {
+        if (!unlocked) {
+          unlocked = true;
+          Object.values(sounds).forEach(audio => {
+            audio.muted = false;
+            audio.play().catch(() => {});
+          });
+          document.querySelector('.mixer-hint').textContent = 'Slide the sliders to make noise!';
+        }
+      });
+
+      document.querySelectorAll('.sound-slider').forEach(slider => {
+        slider.addEventListener('input', function() {
+          const key = this.dataset.sound;
+          if (sounds[key]) {
+            sounds[key].volume = parseFloat(this.value);
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
