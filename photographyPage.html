@@ -21,10 +21,10 @@
       <a href="#" id="inspirations-link">Inspirations</a>
     </nav>
 
-    <div class="sound-mixer">
-      <p class="mixer-title">nature sounds</p>
-      <p class="mixer-hint">Click anywhere on this page to start! :0</p>
-      <div class="mixer-grid">
+<div class="sound-mixer">
+  <p class="mixer-title">nature sounds</p>
+  <p class="mixer-hint">slide the sliders to make noise!</p>
+  <div class="mixer-grid">
         <div class="sound-card">
           <img src="rain.png" alt="rain" class="sound-icon">
           <span class="sound-label">Rain</span>
@@ -100,7 +100,6 @@
             audio.muted = false;
             audio.play().catch(() => {});
           });
-          document.querySelector('.mixer-hint').textContent = 'Slide the sliders to make noise!';
         }
       });
 
