@@ -10,8 +10,8 @@
   </head>
   <body>
     <div class="banner-wrap">
-      <img src="banner.png" alt="Mithra's Artwork Banner" class="banner-img">
-      <div class="banner-placeholder">banner placeholder<br><span>851 x 200px</span></div>
+<img src="artgallerybanner.png" alt="Mithra's Artwork Banner" class="banner-img">
+<div class="banner-placeholder">banner placeholder<br><span>851 x 200px</span></div>
     </div>
 
     <div class="marquee-bar">
@@ -128,11 +128,12 @@
     ctx.fillStyle = selectedColor;
   };
 
-  window.addEventListener("load", () => {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+window.addEventListener("load", () => {
+    const drawingBoard = document.querySelector(".drawing-board");
+    canvas.width = drawingBoard.offsetWidth;
+    canvas.height = drawingBoard.offsetHeight;
     setCanvasBackground();
-  });
+});
 
   const startDraw = (e) => {
     isDrawing = true;
