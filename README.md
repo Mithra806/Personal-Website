@@ -7,7 +7,8 @@
 
 ## Preview
 
-https://mithraspersonalwebsite.netlify.app/
+https://personal-website-omega-rose-41.vercel.app/mainPage.html
 
 
-![Website Preview](https://github.com/user-attachments/assets/d64f70bc-83cc-4677-bfe2-eda9dac619c9)
+![Website Preview](<img width="1190" height="478" alt="image" src="https://github.com/user-attachments/assets/f7ee7727-6cef-442f-bd40-8623b1077d28" />
+)
